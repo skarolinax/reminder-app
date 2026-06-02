@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper-top">
+        <p>ReMiddy</p>
+        <button id="closeBtn">CLOSE</button>
+      </div>
+      <h1>You've been working for a while!</h1>
+      <h2 id="message"></h2>
+      <p class="smalltext">
+        Closing in <span id="countdown">5</span> seconds...
+      </p>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById("message").innerText = params.get("message");
+
+      document.getElementById("closeBtn").onclick = () => {
+        document.querySelector(".container").classList.add("fadeout");
+
+        setTimeout(() => {
+          window.close();
+        }, 500);
+      };
+
+      const countdownElement = document.getElementById("countdown");
+      let countdown = 5;
+
+      const interval = setInterval(() => {
+        countdown--;
+        countdownElement.innerText = countdown;
+
+        if (countdown <= 0) {
+          clearInterval(interval);
+          window.close();
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

@@ -1,41 +1,23 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, app } from "electron";
+import path from "path";
 
 export function createOverlay(message) {
   const win = new BrowserWindow({
-    width: 250,
-    height: 150,
-    x:40,
-    y:40,
+    width: 500,
+    height: 280,
+    x: 40,
+    y: 40,
     frame: false,
+    transparent: true,
     alwaysOnTop: true,
     resizable: false,
-    backgroundColor: "#fff3a1",
   });
 
-  const html = `
-    <html>
-      <head>
-        <style>
-          body {
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            background: #fffa8b;
-            color: #000;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            text-align: center;
-          }
-        </style>
-      </head>
-      <body>
-        ${message}
-      </body>
-    </html>
-  `;
+  const filePath = path.join(app.getAppPath(), "public/overlay.html");
 
-  win.loadURL("data:text/html;charset=utf-8," + encodeURIComponent(html));
+  win.loadURL(
+    `file://${filePath}?message=${encodeURIComponent(message)}`
+  );
 
-  setTimeout(() => win.close(), 2000);
+  setTimeout(() => win.close(), 5000); // How quickly to close the overlay
 }
