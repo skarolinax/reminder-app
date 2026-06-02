@@ -1,6 +1,9 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Notification } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
+
+import { createOverlay } from "./logic/overlay.js";
+import { startScheduler } from "./logic/timer.js";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -12,17 +15,20 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
   });
 
   // and load the index.html of the app.
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
-  } else {
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
-  }
+  // if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+  //   mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+  // } else {
+  //   mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+  // }
+
+  mainWindow.loadURL("http://localhost:5173");
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -34,6 +40,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
+  startScheduler(createOverlay);
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on('activate', () => {
