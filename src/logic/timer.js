@@ -6,8 +6,9 @@ let reminders = [
 
 export function startScheduler(showOverlay) {
   setInterval(() => {
+    
     const reminder = reminders[Math.floor(Math.random() * reminders.length)];
     showOverlay(reminder.text);
     console.log(`Reminder: ${reminder.text}`);
-  }, 8000); // How often to show reminders (in milliseconds)
+  }, 80000); // How often to show reminders (in milliseconds)
 }

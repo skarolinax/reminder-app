@@ -101,3 +101,10 @@ h2 {
     transform:scale(0.5);
   }
 }
+
+
+.wrapper-input {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}

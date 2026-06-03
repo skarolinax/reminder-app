@@ -24,7 +24,7 @@
         document.querySelector(".container").classList.add("fadeout");
 
         setTimeout(() => {
-          window.close();
+          window.hide();
         }, 500);
       };
 
@@ -37,7 +37,7 @@
 
         if (countdown <= 0) {
           clearInterval(interval);
-          window.close();
+          window.hide();
         }
       }, 1000);
     </script>
