@@ -37,6 +37,8 @@ body {
 h1 {
   font-size:50px;
   margin:0;
+  color:#f3b0ff;
+  text-shadow: 2px 2px #1e3c58;
 }
 
 h2 {
