@@ -5,7 +5,16 @@ import "./index.css";
 export default function App() {
 
   const [inputValue, setInputValue] = useState("");
-  const [reminders, setReminders] = useState([]);
+  const [reminders, setReminders] = useState(() => {
+    const savedReminders = localStorage.getItem("reminders"); //Localstorage saves the reminders as JSON so parse it and use it if anything is there, otherwise start with an empty array
+    return savedReminders ? JSON.parse(savedReminders) : [];
+  });
+
+  // Loads reminders from localStorage when the component mounts
+
+  useEffect(() => {
+    localStorage.setItem("reminders", JSON.stringify(reminders));
+  }, [reminders]);
 
   // Filters out the reminder with the specified ID and updates the reminders state
   function deleteReminder(id) {
@@ -57,6 +66,11 @@ export default function App() {
             placeholder="What do you want to be reminded about?"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key ==="Enter"){
+                addReminder();
+              }
+            }}
           />
           <button onClick={() => addReminder()}>Add reminder</button>
         </div>
