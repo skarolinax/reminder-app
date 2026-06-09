@@ -18,7 +18,8 @@
 
     <script>
       const params = new URLSearchParams(window.location.search);
-      document.getElementById("message").innerText = params.get("message");
+      document.getElementById("message").innerText =
+        `${params.get("message")} 🫶`;
 
       document.getElementById("closeBtn").onclick = () => {
         document.querySelector(".container").classList.add("fadeout");
