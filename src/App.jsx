@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./index.css";
 
 export default function App() {
@@ -11,9 +11,11 @@ export default function App() {
     return savedReminders ? JSON.parse(savedReminders) : [];
   });
 
-  // Loads reminders from localStorage when the component mounts
+  //Reference to hold the latest reminders state, so that it can be accessed inside the setInterval callback without needing to add it to the dependency array and cause unnecessary re-renders. 
+  const remindersRef = useRef(reminders);
 
   useEffect(() => {
+    remindersRef.current = reminders;
     localStorage.setItem("reminders", JSON.stringify(reminders));
   }, [reminders]);
 
@@ -27,8 +29,8 @@ export default function App() {
   function addReminder() {
     if (inputValue.trim() === "") return; 
 
-    if (!customInterval) {
-      alert("Please select a reminder interval.");
+    if (!customInterval || isNaN(customInterval) || customInterval <=0 ) { // Make sure the input is valid (not 0 or -)
+      alert("Please select a valid reminder interval.");
       return;
     }
 
@@ -48,31 +50,49 @@ export default function App() {
 
   // Moved the logic for showing reminders to an effect that runs whenever the reminders state changes. This way, we can ensure that the latest reminders are always used when showing overlays.
   useEffect(() => {
+  
     const interval = setInterval(() => {
-      if (reminders.length === 0) return;
+      const currentReminders = remindersRef.current; 
+      if (currentReminders.length === 0) return;
       const now = Date.now();
 
-      reminders.forEach((reminder) => {
-        if(!reminder.interval) return; // Skip reminders without a valid interval
+      let hasTriggeredReminder = false;
 
-        if (now - reminder.lastTriggered >= reminder.interval) {
+      const updatedReminders = currentReminders.map((reminder) => {
+        if (!reminder.interval) return reminder; 
+
+        const timeElapsed = now - reminder.lastTriggered; // How much time already passed since reminder triggered
+        const timeRemaining = reminder.interval - timeElapsed;
+
+        if (timeElapsed >= reminder.interval) {
           // Electron overlay call
           window.electronAPI.showOverlay(reminder.text);
-          console.log(`Reminder: ${reminder.text}`);
-            setReminders((prev) =>
-              prev.map((r) =>
-                r.id === reminder.id
-                  ? { ...r, lastTriggered: now }
-                  : r
-              )
-            );
+    
+          console.log(`TRIGGERED the popup for: ${reminder.text}`);
+          
+          hasTriggeredReminder = true;
+
+          // Only reset the timestamp for the one that just popped up!
+          return { ...reminder, lastTriggered: now }; 
         }
 
+        const secondsLeft = Math.ceil(Math.max(0, timeRemaining) / 1000);
+        console.log(`${reminder.text} counting down: ${secondsLeft}s remaining `);
+
+        // Pass the reminder through untouched so it keeps its countdown progress
+        return reminder; 
       });
-    }, 1000); // How check often to show reminders (in milliseconds)
+
+      // Only tell React to update state if a popup actually fired this second
+      if (hasTriggeredReminder) {
+        setReminders(updatedReminders);
+      }
+    }, 1000); 
 
     return () => clearInterval(interval);
-  }, [reminders]);
+  }, []);
+
+  const isDisabled = !customInterval || inputValue.trim() === "" || isNaN(customInterval) || customInterval <= 0;
 
   return (
     <div className="app-wrapper">
@@ -89,7 +109,7 @@ export default function App() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key ==="Enter"){
+              if (e.key ==="Enter") {
                 addReminder();
               }
             }}
@@ -129,8 +149,8 @@ export default function App() {
                 onChange={(e) => setCustomInterval(e.target.value)} />
             </div>
           <button 
-            onClick={() => addReminder()}
-            disabled={!customInterval || inputValue.trim() === ""}
+            onClick={addReminder}
+            disabled={isDisabled}
             >Add reminder</button>
         </div>
 
