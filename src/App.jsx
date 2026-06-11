@@ -100,70 +100,71 @@ export default function App() {
       <h2>Your own virtual assitant (and BFF) 💕</h2>
 
       <section className="container-main">
-        <p>Try adding a new reminder!</p>
-
-        <div className="wrapper-input">
-          <input
-            type="text"
-            placeholder="What do you want to be reminded about?"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key ==="Enter") {
-                addReminder();
-              }
-            }}
-          />
-            <div id="wrapper-interval" required>
-              <button 
-                value="20" 
-                onClick={() => setCustomInterval("20")} 
-                className={customInterval === "20" ? "activeBtn" : ""}>
-                20 minutes
-              </button>
-              <button 
-                value="40" 
-                onClick={() => setCustomInterval("40")} 
-                className={customInterval === "40" ? "activeBtn" : ""}>
-                40 minutes
-              </button>
-              <button 
-                value="60" 
-                onClick={() => setCustomInterval("60")} 
-                className={customInterval === "60" ? "activeBtn" : ""}>
-                  60 minutes
-
-              </button>
-              <button 
-                value="120" 
-                onClick={() => setCustomInterval("120")} 
-                className={customInterval === "120" ? "activeBtn" : ""}>
-                  120 minutes
-              </button>
-              <p>Or custom value</p>
-              <input 
-                type="number" 
-                placeholder="Minutes" 
-                id="input-interval" 
-                value={["20", "40", "60", "120"].includes(customInterval) ? "" : customInterval} 
-                onChange={(e) => setCustomInterval(e.target.value)} />
-            </div>
-          <button 
-            onClick={addReminder}
-            disabled={isDisabled}
-            >Add reminder</button>
+        <div className="wrapper-sections">
+          <h3>ADD NEW REMINDER</h3>
+          <div className="wrapper-input">
+            <input
+              type="text"
+              placeholder="What do you want to be reminded about?"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key ==="Enter") {
+                  addReminder();
+                }
+              }}
+            />
+              <div id="wrapper-interval" required>
+                <button
+                  value="20"
+                  onClick={() => setCustomInterval("20")}
+                  className={customInterval === "20" ? "activeBtn" : ""}>
+                  Every 20 minutes
+                </button>
+                <button
+                  value="40"
+                  onClick={() => setCustomInterval("40")}
+                  className={customInterval === "40" ? "activeBtn" : ""}>
+                  Every 40 minutes
+                </button>
+                <button
+                  value="60"
+                  onClick={() => setCustomInterval("60")}
+                  className={customInterval === "60" ? "activeBtn" : ""}>
+                    Every 60 minutes
+                </button>
+                <button
+                  value="120"
+                  onClick={() => setCustomInterval("120")}
+                  className={customInterval === "120" ? "activeBtn" : ""}>
+                    Every 120 minutes
+                </button>
+                <p className="custom-p">Or custom value</p>
+                <input
+                  type="number"
+                  placeholder="Minutes"
+                  id="input-interval"
+                  value={["20", "40", "60", "120"].includes(customInterval) ? "" : customInterval}
+                  onChange={(e) => setCustomInterval(e.target.value)} />
+              </div>
+            <button
+              onClick={addReminder}
+              disabled={isDisabled}
+              >+ Add reminder</button>
+          </div>
         </div>
 
-        <p>Manage existing reminders:</p>
-
-        {reminders.map((reminder) => (
-          <div key={reminder.id} className="reminder-item">
-            <span>{reminder.text}</span>
-            <button 
-              onClick={() => deleteReminder(reminder.id)}
-            >Delete</button>
-          </div>
-        ))}
+        <div className="wrapper-sections">
+          <h3>YOUR REMINDERS</h3>
+          {reminders.map((reminder) => (
+            <div key={reminder.id} className="reminder-item">
+              <span>{reminder.text}</span>
+              <button
+                onClick={() => deleteReminder(reminder.id)}
+              >Delete</button>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Notification, ipcMain, Tray, Menu } from 'electron';
+import { app, BrowserWindow, ipcMain, Tray, Menu } from 'electron';
 import path from 'path';
 import started from 'electron-squirrel-startup';
 
@@ -20,8 +20,8 @@ const createWindow = () => {
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',
     titleBarOverlay: {
-    color: '#f4e4da',
-    symbolColor: '#ffffff'
+    color: '#9436ae',
+    symbolColor: '#f4dbfd'
   },
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

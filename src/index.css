@@ -10,7 +10,7 @@ body {
   height:100vh;
 
   background:
-  repeating-conic-gradient(#f4e4da 0 25%, #0000 0 50%) 
+  repeating-conic-gradient(#f4dbfd 0 25%, #e7c0f6 0 50%) 
       50% / 80px 80px;
 
 }
@@ -18,7 +18,6 @@ body {
 #root {
   width:100%;
 }
-
 
 .app-wrapper {
   display: flex;
@@ -35,42 +34,85 @@ body {
 }
 
 h1 {
-  font-size:50px;
+  font-size:5rem;
   margin:0;
-  color:#f3b0ff;
-  text-shadow: 2px 2px #1e3c58;
+  color:#6d0081;
+  text-shadow: 3px 3px #f3b2fd;
 }
 
 h2 {
-  font-size:30px;
+  font-size:2.5rem;
+  margin:0;
+  color:#6d0081;
+}
+
+h3 {
+  font-size:1.8rem;
+  color:#6d0081;
   margin:0;
 }
 
 input {
-  background:#f3b0ff;
-  border:2px dashed #1e3c58;
+  background:#ffffff;
+  width: 95%;
+  border:1px solid #f3b0ff;
   border-radius:10px;
   padding:10px;
+  margin:20px 0 10px 0;
 
-  width:100%
 }
 
 button {
-  background:#f769ad;
+  background:rgb(255, 255, 255, 0.5);
   border:2px solid #f3b0ff;
   border-radius:10px;
   padding:10px;
   cursor:pointer;
+  transition:all 0.3s ease;
 
   &:disabled {
     cursor:not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background-color: #6d0081;
+    color:#f3b0ff;
+
   }
 }
 
 .container-main {
   align-self:flex-start;
+  width: 100%;
 }
 
 .activeBtn {
   background:#f3b0ff;
+}
+
+.wrapper-sections {
+  border-radius:10px;
+  border: 2px dashed #e59df7;
+  padding:20px;
+  background-color: rgb(255, 255, 255, 0.4);
+  margin-block: 10px;
+}
+
+.custom-p {
+  margin: 10px 0 0 0;
+  font-size: 2rem;
+  text-align: center;
+  text-shadow: 1px 1px #6d0081;
+  color:#f3b0ff;
+
+}
+
+.reminder-item {
+  border-radius:10px;
+  border: 1px solid #e59df7;
+background-color: rgba(243, 176, 255, 0.4);
+  span {
+    color: #6d0081;
+    font-size: 1.7rem;
+  }
 }
