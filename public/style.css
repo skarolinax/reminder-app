@@ -18,14 +18,25 @@ body {
   
 }
 
+@font-face{
+    font-family: "Byte";
+    src: url('./fonts/ByteBounce.woff') format('woff'),
+         url('./fonts/ByteBounce.woff2') format('woff2');
+    font-style: normal;
+}
+
 h1 {
   margin: 0;
   font-size: 15px;
   font-weight:normal;
+
 }
 
 h2 {
-  font-size:20px;
+  font-size:28px;
+  font-family: "Byte";
+  margin: 0;
+  color:#6d0081;
 }
 
 .wrapper-top {
@@ -35,21 +46,25 @@ h2 {
   margin-bottom: 20px;
 
   p {
-    font-size: 10px;
+    font-size: 18px;
     font-weight: 900;
     margin: 0;
+    font-family: Byte;
+      color:#6d0081;
+
   }
 
   button {
     background:transparent;
-    border: 1px solid #000;
-    border-radius: 10px;
+    border: 1px dashed #6d0081;
+    border-radius: 5px;
     cursor:pointer;
     font-size:10px;
     margin-right: 10px;
 
     &:hover {
-      background:#f0f0f0;
+      background:#6d0081;
+      color:#e7c0f6
     }
     
   }
@@ -59,12 +74,13 @@ h2 {
   font-size: 10px;
   color:white;
   align-self: flex-end;
+  text-align: center;
 }
 
 .container {
   width: 310px;
   height: 140px;
-  background: #ffb6d9;
+  background: #e7c0f6;
   border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   padding: 40px;

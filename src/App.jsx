@@ -119,25 +119,25 @@ export default function App() {
                   value="20"
                   onClick={() => setCustomInterval("20")}
                   className={customInterval === "20" ? "activeBtn" : ""}>
-                  Every 20 minutes
+                  ✨ Every 20 minutes
                 </button>
                 <button
                   value="40"
                   onClick={() => setCustomInterval("40")}
                   className={customInterval === "40" ? "activeBtn" : ""}>
-                  Every 40 minutes
+                  🧘🏼 Every 40 minutes
                 </button>
                 <button
                   value="60"
                   onClick={() => setCustomInterval("60")}
                   className={customInterval === "60" ? "activeBtn" : ""}>
-                    Every 60 minutes
+                    🍵 Every 60 minutes
                 </button>
                 <button
                   value="120"
                   onClick={() => setCustomInterval("120")}
                   className={customInterval === "120" ? "activeBtn" : ""}>
-                    Every 120 minutes
+                    🫧 Every 120 minutes
                 </button>
                 <p className="custom-p">Or custom value</p>
                 <input
@@ -150,6 +150,7 @@ export default function App() {
             <button
               onClick={addReminder}
               disabled={isDisabled}
+              className="add-button"
               >+ Add reminder</button>
           </div>
         </div>
@@ -158,7 +159,7 @@ export default function App() {
           <h3>YOUR REMINDERS</h3>
           {reminders.map((reminder) => (
             <div key={reminder.id} className="reminder-item">
-              <span>{reminder.text}</span>
+              <p>{reminder.text}<span>Every {reminder.interval / 1000 / 60} mins</span></p>
               <button
                 onClick={() => deleteReminder(reminder.id)}
               >Delete</button>

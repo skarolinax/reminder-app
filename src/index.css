@@ -60,6 +60,10 @@ input {
   padding:10px;
   margin:20px 0 10px 0;
 
+  &:focus {
+    outline: 2px solid #6d0081;
+  }
+
 }
 
 button {
@@ -94,7 +98,7 @@ button {
   border-radius:10px;
   border: 2px dashed #e59df7;
   padding:20px;
-  background-color: rgb(255, 255, 255, 0.4);
+  background-color: rgb(255, 255, 255, 0.6);
   margin-block: 10px;
 }
 
@@ -102,17 +106,65 @@ button {
   margin: 10px 0 0 0;
   font-size: 2rem;
   text-align: center;
-  text-shadow: 1px 1px #6d0081;
-  color:#f3b0ff;
+  text-shadow: 1px 1px #f3b0ff;
+  color:#6d0081;
+  align-items: center;
+  justify-content: center;
 
+  display: flex;
+
+  &::before,
+  &::after {
+    border-bottom: 3px solid #6d0081;
+    content: "";
+    flex:1;
+  }
+
+  &::after {
+    margin-inline-start: 17px;
+  }
+  &::before {
+    margin-inline-end: 17px;
+  }
+}
+
+#wrapper-interval {
+  button {
+    margin-right: 10px;
+  }
 }
 
 .reminder-item {
   border-radius:10px;
   border: 1px solid #e59df7;
-background-color: rgba(243, 176, 255, 0.4);
-  span {
+  background-color: rgba(243, 176, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-block: 12px;
+
+  p {
     color: #6d0081;
     font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    margin:0;
   }
+
+  span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color:white;
+    border-radius: 10px;
+    padding: 5px;
+    border:1px solid #f3b0ff;
+    background:#6d0081;
+  }
+}
+
+.add-button {
+  width:100%;
+  border-bottom: 5px solid #6d0081;
 }
