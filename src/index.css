@@ -54,7 +54,7 @@ h3 {
 
 input {
   background:#ffffff;
-  width: 95%;
+  width: 97%;
   border:1px solid #f3b0ff;
   border-radius:10px;
   padding:10px;
@@ -64,6 +64,33 @@ input {
     outline: 2px solid #6d0081;
   }
 
+}
+
+.buttonFocused {
+  background-color: #6d0081;
+  color: #f3b0ff;
+}
+
+.wrapper-toggle {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+
+  button {
+    flex:1;
+
+    &:first-of-type {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: transparent;
+    }
+
+    &:nth-child(2) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: transparent;
+    }
+  }
 }
 
 button {
