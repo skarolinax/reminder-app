@@ -66,7 +66,7 @@ export default function App() {
         id: Date.now(),
         text: inputValue,
         type: "date",
-        triggerAt:new Date(dateValue).getTime(),
+        triggerAt: inputtedDate,
       };
 
       setReminders([...reminders, newReminder]);
@@ -136,10 +136,11 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const targetTimestamp = dateValue ? new Date(dateValue).getTime() : 0;
   const isDisabled = 
     mode === "interval" ?
       !customInterval || inputValue.trim() === "" || isNaN(customInterval) || customInterval <= 0
-      : !dateValue || inputValue.trim() === "" || isNaN(new Date(dateValue).getTime()) || new Date(dateValue).getTime() <= Date.now();
+      : !dateValue || inputValue.trim() === "" || isNaN(targetTimestamp) || targetTimestamp <= Date.now();
 
   return (
     <div className="app-wrapper">
