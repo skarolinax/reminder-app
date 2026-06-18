@@ -8,9 +8,10 @@ export default function App() {
 
   const [customInterval, setCustomInterval] = useState(""); // Default interval in minutes
   const [reminders, setReminders] = useState(() => {
-    const savedReminders = localStorage.getItem("reminders"); //Localstorage saves the reminders as JSON so parse it and use it if anything is there, otherwise start with an empty array
-    return savedReminders ? JSON.parse(savedReminders) : [];
-  });
+  const savedReminders = localStorage.getItem("reminders"); //Localstorage saves the reminders as JSON so parse it and use it if anything is there, otherwise start with an empty array
+  console.log("Loaded reminders:", savedReminders);
+  return savedReminders ? JSON.parse(savedReminders) : [];
+});
 
   const [mode, setMode] = useState("interval");
   const [dateValue, setDateValue] = useState("");
@@ -145,7 +146,7 @@ export default function App() {
   return (
     <div className="app-wrapper">
       <h1>Hi, I'm ReMiddy</h1>
-      <h2>Your own virtual assitant (and BFF) 💕</h2>
+      <h2>Your own virtual assitant (and bestie) 🤍</h2>
 
       <section className="container-main">
         <div className="wrapper-sections">

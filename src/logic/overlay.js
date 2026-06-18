@@ -14,10 +14,11 @@ export function createOverlay(message) {
   });
 
   const filePath = path.join(app.getAppPath(), "public/overlay.html");
+  // win.webContents.openDevTools();
 
   win.loadURL(
     `file://${filePath}?message=${encodeURIComponent(message)}`
-  );
+  )
 
-  setTimeout(() => win.close(), 5000); // How quickly to close the overlay
+  // setTimeout(() => win.close(), 5000); // How quickly to close the overlay
 }

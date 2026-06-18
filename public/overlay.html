@@ -1,4 +1,5 @@
 <!doctype html>
+<meta charset="UTF-8" />
 <html>
   <head>
     <link rel="stylesheet" href="./style.css" />
@@ -7,9 +8,9 @@
     <div class="container">
       <div class="wrapper-top">
         <p>ReMiddy</p>
-        <button id="closeBtn">CLOSE</button>
+        <button id="closeBtn">X</button>
       </div>
-      <h1>You've been working for a while!</h1>
+      <h1>You've been working too long!</h1>
       <h2 id="message"></h2>
       <p class="smalltext">
         Closing in <span id="countdown">5</span> seconds...
@@ -19,26 +20,33 @@
     <script>
       const params = new URLSearchParams(window.location.search);
       document.getElementById("message").innerText =
-        `${params.get("message")} 🫶`;
+        `${params.get("message")} 🫧`;
 
-      document.getElementById("closeBtn").onclick = () => {
+      function closeContainer() {
         document.querySelector(".container").classList.add("fadeout");
 
         setTimeout(() => {
-          window.hide();
+          window.close();
         }, 500);
-      };
+      }
+
+      document
+        .getElementById("closeBtn")
+        .addEventListener("click", closeContainer);
 
       const countdownElement = document.getElementById("countdown"); //Need to update it with overlay.js
       let countdown = 5;
+      let isClosing = false;
 
       const interval = setInterval(() => {
         countdown--;
         countdownElement.innerText = countdown;
 
         if (countdown <= 0) {
+          if (isClosing) return;
+          isClosing = true;
           clearInterval(interval);
-          window.hide();
+          closeContainer();
         }
       }, 1000);
     </script>

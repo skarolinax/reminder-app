@@ -104,8 +104,8 @@ let reminderShown = false;
 setInterval(() => {
   const idleTime = powerMonitor.getSystemIdleTime();
 
-  const breakThreshold = 60 * 5 // min 5 minutes idle so 
-  const activityLimit = 60 * 50 // max 50 minutes without a break, reset only when breakThreshold was achieved
+  const breakThreshold = 60 * 5 // min 5 minutes idle so (6s for testing)
+  const activityLimit = 60 * 50 // max 50 minutes without a break, reset only when breakThreshold was achieved (10 sec for test)
 
   const isInBreak = idleTime >= breakThreshold; //Check if the break happened 
 
@@ -116,7 +116,6 @@ setInterval(() => {
   } else {
     activeSeconds += 1;
     console.log(activeSeconds, reminderShown, isInBreak)
-    reminderShown = false;
   }
 
   if (activeSeconds >= activityLimit && !reminderShown ) {
@@ -124,5 +123,8 @@ setInterval(() => {
     console.log("No break (idle time) detected in 50 minutes. Firing a reminder.")
     activeSeconds = 0;
     reminderShown = true; //reset to not fire multiple times
+    // setTimeout(() => {
+    //     reminderShown = false;
+    // }, 4000);
   }
 }, 1000)

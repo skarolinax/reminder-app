@@ -26,10 +26,21 @@ body {
   width: 100%;
 }
 
+button, input {
+  font-family: Montserrat;
+}
+
 @font-face{
     font-family: "Byte";
     src: url('../fonts/ByteBounce.woff') format('woff'),
          url('../fonts/ByteBounce.woff2') format('woff2');
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url('./fonts/Montserrat-Regular.woff') format('woff'),
+         url('./fonts/Montserrat-Regular.woff2') format('woff2');
     font-style: normal;
 }
 

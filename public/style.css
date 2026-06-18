@@ -27,23 +27,25 @@ body {
 
 h1 {
   margin: 0;
-  font-size: 15px;
+  font-size: 13px;
   font-weight:normal;
 
 }
 
 h2 {
-  font-size:28px;
+  font-size:30px;
   font-family: "Byte";
   margin: 0;
   color:#6d0081;
+  width:80%;
+  line-height: 1;
 }
 
 .wrapper-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 13px;
 
   p {
     font-size: 18px;
@@ -55,16 +57,18 @@ h2 {
   }
 
   button {
-    background:transparent;
-    border: 1px dashed #6d0081;
+    background-color: #6d0081;
+    border: 1px solid #6d0081;
+    color:#e7c0f6;
     border-radius: 5px;
     cursor:pointer;
     font-size:10px;
+    padding:5px;
     margin-right: 10px;
 
     &:hover {
-      background:#6d0081;
-      color:#e7c0f6
+      background:#e7c0f6;
+      color:#6d0081;
     }
     
   }
@@ -72,7 +76,6 @@ h2 {
 
 .smalltext {
   font-size: 10px;
-  color:white;
   align-self: flex-end;
   text-align: center;
 }
