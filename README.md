@@ -9,6 +9,7 @@ ReMiddy is a Y2K-aesthetic desktop reminder app built with **React + Electron**.
 ## Features
 
 - **Custom reminder intervals** - choose from 20, 40, 60, or 120 minutes, or set any custom value
+- **Tracking your breaks** - the app tracks how long you've been working for and prompts you to take time off
 - **Native desktop notifications** - reminders pop up as on-screen toasts that auto-dismiss
 - **Manage your reminders** - add and delete reminders at any time
 - **Y2K-inspired UI** - checkerboard vibes, pixel fonts
